@@ -1,5 +1,5 @@
 import React from "react";
-import { withReducer } from "recompose";
+import { withReducer, onlyUpdateForKeys } from "recompose";
 import * as GameLogic from "./gameLogic";
 import PlayerXImage from "./PlayerX.svg";
 import PlayerOImage from "./PlayerO.svg";
@@ -43,8 +43,8 @@ const PlayerO = () => (
 );
 const NoPlayer = () => <span className="NoPlayer" />;
 
-const Cell = ({ field, value, x, y, onMove }) => {
-  const C = () => {
+const Cell = onlyUpdateForKeys(["value"])(({ field, value, x, y, onMove }) => {
+  const Child = () => {
     switch (value) {
       case "X":
         return <PlayerX />;
@@ -60,10 +60,10 @@ const Cell = ({ field, value, x, y, onMove }) => {
       disabled={value !== null}
       onClick={e => onMove(x, y)}
     >
-      <C />
+      <Child />
     </button>
   );
-};
+});
 
 const PlayField = ({ field, onMove }) => (
   <div>

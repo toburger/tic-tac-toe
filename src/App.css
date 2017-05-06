@@ -45,7 +45,15 @@
 .PlayerX, .PlayerY, .NoPlayer {
   width: 35px;
   height: 35px;
+  animation: expand .3s ease;
   box-sizing: content-box;
+}
+
+@keyframes expand {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
 
 .NoPlayer {
