@@ -59,7 +59,6 @@ const Cell = ({ field, value, x, y, onMove }) => {
       className="Cell"
       disabled={value !== null}
       onClick={e => onMove(x, y)}
-      className="Cell"
     >
       <C />
     </button>
@@ -84,6 +83,7 @@ const GameOver = ({ winner, onRestart }) => (
       className="GameOver__image"
       onClick={e => onRestart()}
       src={RestartImage}
+      alt="Restart"
     />
     <p className="GameOver__text">
       {winner === "DRAW" ? "It's a draw!" : `Player ${winner} wins!`}
