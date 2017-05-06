@@ -1,0 +1,72 @@
+.App {
+  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Cell {
+  border: solid 2px #DDDDDD;
+  border-left: none;
+  border-top: none;
+  border-collapse: collapse;
+  display: inline-block;
+}
+
+.Cell:last-child {
+  border-right: none;
+}
+
+.PlayField__row {
+  white-space: nowrap;
+}
+
+.PlayField__row:last-child .Cell {
+  border-bottom: none;
+}
+
+.PlayerX, .PlayerY, .NoPlayer {
+  padding: 15px;
+  width: 35px;
+  height: 35px;
+  box-sizing: content-box;
+}
+
+.NoPlayer {
+  display: inline-block
+}
+
+.Cell {
+  background: none;
+}
+
+.Cell:focus {
+  outline: none;
+}
+
+.GameOver {
+  color: #939393;
+  font-weight: bold;
+  text-transform: uppercase;
+  height: 50px;
+  display:flex;
+  align-items: center;
+}
+
+.GameOver__image {
+  margin-right: 10px;
+}
+
+.GameOver__image:hover {
+  filter: saturate(3);
+}
+
+.GameOver__text {
+  padding: 5px 20px;
+  height: 20px;
+  border: 1px solid #DDDDDD;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-sizing: content-box;
+}
