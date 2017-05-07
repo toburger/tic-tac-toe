@@ -7,7 +7,7 @@ import RestartImage from "./restart.png";
 import "./App.css";
 
 const initialState = {
-  field: [[null, null, null], [null, null, null], [null, null, null]],
+  board: [[null, null, null], [null, null, null], [null, null, null]],
   currentPlayer: "X",
   winner: null
 };
@@ -15,18 +15,18 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "MOVE":
-      if (!GameLogic.canUpdateField(state.field, action.x, action.y))
+      if (!GameLogic.canUpdateBoard(state.board, action.x, action.y))
         return state;
-      const nField = GameLogic.updateField(
-        state.field,
+      const newBoard = GameLogic.updateBoard(
+        state.board,
         action.x,
         action.y,
         state.currentPlayer
       );
-      const winner = GameLogic.getWinner(nField);
+      const winner = GameLogic.getWinner(newBoard);
       return {
         ...state,
-        field: nField,
+        board: newBoard,
         currentPlayer: state.currentPlayer === "X" ? "O" : "X",
         winner
       };
@@ -45,7 +45,7 @@ const PlayerO = props => (
 );
 const NoPlayer = props => <span {...props} className="NoPlayer" />;
 
-const Cell = onlyUpdateForKeys(["value"])(({ field, value, x, y, onMove }) => {
+const Cell = onlyUpdateForKeys(["value"])(({ board, value, x, y, onMove }) => {
   const Child = () => {
     switch (value) {
       case "X":
@@ -81,21 +81,21 @@ const CurrentPlayer = ({ currentPlayer }) => (
   </div>
 );
 
-const GameBoard = ({ field, onMove }) => (
+const Board = ({ board, onMove }) => (
   <div>
-    {field.map((ys, x) => (
-      <div key={`${x}`} className="PlayField__row">
+    {board.map((ys, x) => (
+      <div key={`${x}`} className="Board__row">
         {ys.map((v, y) => (
-          <Cell key={`${x}-${y}`} {...{ field, value: v, x, y, onMove }} />
+          <Cell key={`${x}-${y}`} {...{ board, value: v, x, y, onMove }} />
         ))}
       </div>
     ))}
   </div>
 );
 
-const PlayField = ({ field, onMove, currentPlayer }) => (
+const Game = ({ board, onMove, currentPlayer }) => (
   <div>
-    <GameBoard field={field} onMove={onMove} />
+    <Board board={board} onMove={onMove} />
     <CurrentPlayer currentPlayer={currentPlayer} />
   </div>
 );
@@ -129,8 +129,8 @@ const App = enhance(({ state, dispatch }) => (
           winner={state.winner}
           onRestart={() => dispatch({ type: "RESTART" })}
         />
-      : <PlayField
-          field={state.field}
+      : <Game
+          board={state.board}
           currentPlayer={state.currentPlayer}
           onMove={(x, y) => dispatch({ type: "MOVE", x, y })}
         />}

@@ -29,15 +29,15 @@
   padding-right: 18px;
 }
 
-.PlayField__row {
+.Board__row {
   white-space: nowrap;
 }
 
-.PlayField__row:first-child .Cell {
+.Board__row:first-child .Cell {
   padding-top: 18px;
 }
 
-.PlayField__row:last-child .Cell {
+.Board__row:last-child .Cell {
   border-bottom: none;
   padding-bottom: 18px;
 }
