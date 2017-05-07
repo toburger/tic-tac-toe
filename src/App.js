@@ -65,13 +65,16 @@ const Cell = onlyUpdateForKeys(["value"])(({ field, value, x, y, onMove }) => {
   );
 });
 
+const DispatchPlayer = ({ player }) =>
+  player === "X"
+    ? <PlayerX style={{ height: "10px" }} />
+    : <PlayerO style={{ height: "10px" }} />;
+
 const CurrentPlayer = ({ currentPlayer }) => (
   <div className="CurrentPlayer">
     <span className="CurrentPlayer__text">
       Player:
-      {currentPlayer === "X"
-        ? <PlayerX style={{ height: "10px" }} />
-        : <PlayerO style={{ height: "10px" }} />}
+      <DispatchPlayer player={currentPlayer} />
     </span>
   </div>
 );
@@ -104,7 +107,13 @@ const GameOver = ({ winner, onRestart }) => (
       alt="Restart"
     />
     <p className="GameOver__text">
-      {winner === "DRAW" ? "It's a draw!" : `Player ${winner} wins!`}
+      {winner === "DRAW"
+        ? "It's a draw!"
+        : <span>
+            Player
+            <DispatchPlayer player={winner} />
+            wins!
+          </span>}
     </p>
   </div>
 );
