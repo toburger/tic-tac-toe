@@ -42,16 +42,30 @@
   padding-bottom: 18px;
 }
 
-.PlayerX, .PlayerY, .NoPlayer {
+.PlayerX, .PlayerO, .NoPlayer {
   width: 35px;
   height: 35px;
-  animation: expand .3s ease;
   box-sizing: content-box;
+}
+
+.PlayerX {
+  animation: expand .3s ease;
+}
+
+.PlayerO {
+  animation: retract .3s ease;
 }
 
 @keyframes expand {
   from {
     transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes retract {
+  from {
+    transform: scale(2);
     opacity: 0;
   }
 }

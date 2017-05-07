@@ -39,7 +39,7 @@ const PlayerX = () => (
   <img alt="PlayerX" src={PlayerXImage} className="PlayerX" />
 );
 const PlayerO = () => (
-  <img alt="PlayerY" src={PlayerOImage} className="PlayerY" />
+  <img alt="PlayerO" src={PlayerOImage} className="PlayerO" />
 );
 const NoPlayer = () => <span className="NoPlayer" />;
 
