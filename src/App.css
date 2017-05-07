@@ -49,11 +49,11 @@
 }
 
 .PlayerX {
-  animation: expand .3s ease;
+  animation: retract .3s ease;
 }
 
 .PlayerO {
-  animation: retract .3s ease;
+  animation: expand .3s ease;
 }
 
 @keyframes expand {
