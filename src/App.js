@@ -1,9 +1,9 @@
 import React from "react";
 import { withReducer, onlyUpdateForKeys } from "recompose";
 import * as GameLogic from "./gameLogic";
-import PlayerXImage from "./PlayerX.svg";
-import PlayerOImage from "./PlayerO.svg";
-import RestartImage from "./restart.png";
+import PlayerXImage from "./assets/PlayerX.svg";
+import PlayerOImage from "./assets/PlayerO.svg";
+import RestartImage from "./assets/restart.png";
 import "./App.css";
 
 const initialState = {
