@@ -18,27 +18,27 @@ export const updateField = (value, x, y, field) =>
 export const getField = (x, y) => R.path([x, y]);
 export const canUpdateField = (x, y) => getField(x, y) === null;
 
-const checkRowsForWinner = (v, field) => {
+const checkRowsForWinner = (field, v) => {
   const check = R.all(R.equals(v));
   return check(field[0]) || check(field[1]) || check(field[2]);
 };
 
-const checkColsForWinner = (v, field) => {
+const checkColsForWinner = (field, v) => {
   const tfield = R.transpose(field);
-  return checkRowsForWinner(v, tfield);
+  return checkRowsForWinner(tfield, v);
 };
 
-const checkDiagonalsForWinner = (v, field) => {
+const checkDiagonalsForWinner = (field, v) => {
   const diag1 = [field[0][0], field[1][1], field[2][2]];
   const diag2 = [field[2][0], field[1][1], field[0][2]];
   const check = R.all(R.equals(v));
   return check(diag1) || check(diag2);
 };
 
-const checkForWinner = (v, field) =>
-  checkRowsForWinner(v, field) ||
-  checkColsForWinner(v, field) ||
-  checkDiagonalsForWinner(v, field);
+const checkForWinner = (field, v) =>
+  checkRowsForWinner(field, v) ||
+  checkColsForWinner(field, v) ||
+  checkDiagonalsForWinner(field, v);
 
 const checkForDraw = field => {
   const check = R.all(x => x !== null);
@@ -46,10 +46,10 @@ const checkForDraw = field => {
 };
 
 export const getWinner = field => {
-  if (checkForWinner("X", field))
+  if (checkForWinner(field, "X"))
     // player X wins!
     return "X";
-  else if (checkForWinner("O", field))
+  else if (checkForWinner(field, "O"))
     // player O wins!
     return "O";
   else if (checkForDraw(field))
