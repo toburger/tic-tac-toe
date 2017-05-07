@@ -15,8 +15,8 @@ export const logField = field => {
 
 export const updateField = (value, x, y, field) =>
   R.assocPath([x, y], value)(field);
-export const getField = (x, y) => R.path([x, y]);
-export const canUpdateField = (x, y) => getField(x, y) === null;
+export const getField = (x, y, field) => R.path([x, y])(field);
+export const canUpdateField = (x, y, field) => getField(x, y, field) === null;
 
 const checkRowsForWinner = (field, v) => {
   const check = R.all(R.equals(v));
