@@ -35,13 +35,13 @@ const reducer = (state, action) => {
   }
 };
 
-const PlayerX = () => (
-  <img alt="PlayerX" src={PlayerXImage} className="PlayerX" />
+const PlayerX = props => (
+  <img {...props} alt="PlayerX" src={PlayerXImage} className="PlayerX" />
 );
-const PlayerO = () => (
-  <img alt="PlayerO" src={PlayerOImage} className="PlayerO" />
+const PlayerO = props => (
+  <img {...props} alt="PlayerO" src={PlayerOImage} className="PlayerO" />
 );
-const NoPlayer = () => <span className="NoPlayer" />;
+const NoPlayer = props => <span {...props} className="NoPlayer" />;
 
 const Cell = onlyUpdateForKeys(["value"])(({ field, value, x, y, onMove }) => {
   const Child = () => {
@@ -65,7 +65,18 @@ const Cell = onlyUpdateForKeys(["value"])(({ field, value, x, y, onMove }) => {
   );
 });
 
-const PlayField = ({ field, onMove }) => (
+const CurrentPlayer = ({ currentPlayer }) => (
+  <div className="CurrentPlayer">
+    <span className="CurrentPlayer__text">
+      Player:
+      {currentPlayer === "X"
+        ? <PlayerX style={{ height: "10px" }} />
+        : <PlayerO style={{ height: "10px" }} />}
+    </span>
+  </div>
+);
+
+const GameBoard = ({ field, onMove }) => (
   <div>
     {field.map((ys, x) => (
       <div key={`${x}`} className="PlayField__row">
@@ -74,6 +85,13 @@ const PlayField = ({ field, onMove }) => (
         ))}
       </div>
     ))}
+  </div>
+);
+
+const PlayField = ({ field, onMove, currentPlayer }) => (
+  <div>
+    <GameBoard field={field} onMove={onMove} />
+    <CurrentPlayer currentPlayer={currentPlayer} />
   </div>
 );
 
@@ -102,6 +120,7 @@ const App = enhance(({ state, dispatch }) => (
         />
       : <PlayField
           field={state.field}
+          currentPlayer={state.currentPlayer}
           onMove={(x, y) => dispatch({ type: "MOVE", x, y })}
         />}
   </div>

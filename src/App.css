@@ -74,7 +74,7 @@
   display: inline-block
 }
 
-.GameOver {
+.GameOver, .CurrentPlayer {
   color: #939393;
   font-weight: bold;
   text-transform: uppercase;
@@ -91,11 +91,16 @@
   filter: saturate(3);
 }
 
-.GameOver__text {
+.GameOver__text, .CurrentPlayer__text {
   padding: 5px 20px;
   height: 20px;
   border: 1px solid #DDDDDD;
   border-radius: 20px;
   white-space: nowrap;
   box-sizing: content-box;
+}
+
+.CurrentPlayer__text {
+  margin: auto;
+  margin-top: 20px;
 }
