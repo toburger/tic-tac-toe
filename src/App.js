@@ -1,5 +1,7 @@
 import React from "react";
-import { withReducer, onlyUpdateForKeys } from "recompose";
+import { onlyUpdateForKeys } from "recompose";
+import { createStore } from "redux";
+import { connect, Provider } from "react-redux";
 import * as GameLogic from "./gameLogic";
 import PlayerXImage from "./assets/PlayerX.svg";
 import PlayerOImage from "./assets/PlayerO.svg";
@@ -120,21 +122,33 @@ const GameOver = ({ winner, onRestart }) => (
   </div>
 );
 
-const enhance = withReducer("state", "dispatch", reducer, initialState);
-
-const App = enhance(({ state, dispatch }) => (
+const App = ({ winner, board, currentPlayer, dispatch }) => (
   <div className="App">
-    {state.winner
+    {winner
       ? <GameOver
-          winner={state.winner}
+          winner={winner}
           onRestart={() => dispatch({ type: "RESTART" })}
         />
       : <Game
-          board={state.board}
-          currentPlayer={state.currentPlayer}
+          board={board}
+          currentPlayer={currentPlayer}
           onMove={(x, y) => dispatch({ type: "MOVE", x, y })}
         />}
   </div>
-));
+);
 
-export default App;
+const ConnectedApp = connect(x => x)(App);
+
+const store = createStore(
+  reducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+const AppWithStore = () => (
+  <Provider store={store}>
+    <ConnectedApp />
+  </Provider>
+);
+
+export default AppWithStore;
