@@ -46,14 +46,14 @@ const checkForDraw = field => {
 };
 
 export const getWinner = field => {
-  if (checkForDraw(field))
-    // it'a a draw!
-    return "DRAW";
-  else if (checkForWinner("X", field))
+  if (checkForWinner("X", field))
     // player X wins!
     return "X";
   else if (checkForWinner("O", field))
     // player O wins!
     return "O";
+  else if (checkForDraw(field))
+    // it'a a draw!
+    return "DRAW";
   else return null;
 };
