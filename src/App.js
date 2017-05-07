@@ -15,13 +15,13 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "MOVE":
-      if (!GameLogic.canUpdateField(action.x, action.y, state.field))
+      if (!GameLogic.canUpdateField(state.field, action.x, action.y))
         return state;
       const nField = GameLogic.updateField(
-        state.currentPlayer,
+        state.field,
         action.x,
         action.y,
-        state.field
+        state.currentPlayer
       );
       const winner = GameLogic.getWinner(nField);
       return {
