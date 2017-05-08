@@ -79,12 +79,12 @@ const Cell = onlyUpdateForKeys(["value"])(({ board, value, x, y, onMove }) => {
 
 const DispatchPlayer = ({ player }) =>
   player === "X"
-    ? <PlayerX className="PlayerX--small" />
-    : <PlayerO className="PlayerO--small" />;
+    ? <PlayerX className="PlayerX--Small" />
+    : <PlayerO className="PlayerO--Small" />;
 
 const CurrentPlayer = ({ currentPlayer }) => (
   <div className="CurrentPlayer">
-    <span className="CurrentPlayer__text">
+    <span className="CurrentPlayer__Text">
       Player:
       <DispatchPlayer player={currentPlayer} />
     </span>
@@ -94,7 +94,7 @@ const CurrentPlayer = ({ currentPlayer }) => (
 const Board = ({ board, onMove }) => (
   <div>
     {board.map((ys, x) => (
-      <div key={`${x}`} className="Board__row">
+      <div key={`${x}`} className="Board__Row">
         {ys.map((v, y) => (
           <Cell key={`${x}-${y}`} {...{ board, value: v, x, y, onMove }} />
         ))}
@@ -113,12 +113,12 @@ const Game = ({ board, onMove, currentPlayer }) => (
 const GameOver = ({ winner, onRestart }) => (
   <div className="GameOver">
     <img
-      className="GameOver__image"
+      className="GameOver__Image"
       onClick={e => onRestart()}
       src={RestartImage}
       alt="Restart"
     />
-    <p className="GameOver__text">
+    <p className="GameOver__Text">
       {winner === "DRAW"
         ? "It's a draw!"
         : <span>
