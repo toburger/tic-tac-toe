@@ -37,11 +37,21 @@ const reducer = (state, action) => {
   }
 };
 
-const PlayerX = props => (
-  <img {...props} alt="PlayerX" src={PlayerXImage} className="PlayerX" />
+const PlayerX = ({ className, ...props }) => (
+  <img
+    {...props}
+    alt="PlayerX"
+    src={PlayerXImage}
+    className={["PlayerX", className].join(" ")}
+  />
 );
-const PlayerO = props => (
-  <img {...props} alt="PlayerO" src={PlayerOImage} className="PlayerO" />
+const PlayerO = ({ className, ...props }) => (
+  <img
+    {...props}
+    alt="PlayerO"
+    src={PlayerOImage}
+    className={["PlayerO", className].join(" ")}
+  />
 );
 const NoPlayer = props => <span {...props} className="NoPlayer" />;
 
@@ -69,8 +79,8 @@ const Cell = onlyUpdateForKeys(["value"])(({ board, value, x, y, onMove }) => {
 
 const DispatchPlayer = ({ player }) =>
   player === "X"
-    ? <PlayerX style={{ height: "10px" }} />
-    : <PlayerO style={{ height: "10px" }} />;
+    ? <PlayerX className="PlayerX--small" />
+    : <PlayerO className="PlayerO--small" />;
 
 const CurrentPlayer = ({ currentPlayer }) => (
   <div className="CurrentPlayer">

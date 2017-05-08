@@ -48,6 +48,12 @@
   box-sizing: content-box;
 }
 
+.PlayerX--small, .PlayerO--small {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+}
+
 .PlayerX {
   animation: retract .3s ease;
 }
@@ -92,12 +98,12 @@
 }
 
 .GameOver__text, .CurrentPlayer__text {
-  padding: 5px 20px;
+  padding: 7px 20px 4px;
+  font-size: 1em;
   height: 20px;
   border: 1px solid #DDDDDD;
   border-radius: 20px;
   white-space: nowrap;
-  box-sizing: content-box;
 }
 
 .CurrentPlayer__text {
