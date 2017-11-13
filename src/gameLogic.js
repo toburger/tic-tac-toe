@@ -12,7 +12,7 @@
 */
 
 // This lib contains powerful functions for list transformations.
-import R from "ramda";
+import * as R from "ramda";
 
 /**
  * Helps debugging the board
