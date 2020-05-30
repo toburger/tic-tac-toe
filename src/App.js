@@ -1,9 +1,10 @@
 import React, { memo, useReducer } from "react";
 import * as GameLogic from "./gameLogic";
+
+import "./App.css";
 import PlayerXImage from "./assets/PlayerX.svg";
 import PlayerOImage from "./assets/PlayerO.svg";
 import RestartImage from "./assets/restart.png";
-import "./App.css";
 
 const initialState = {
   board: [
