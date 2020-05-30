@@ -63,7 +63,7 @@ const PlayerO = ({ className, ...props }) => (
 );
 const NoPlayer = (props) => <span {...props} className="NoPlayer" />;
 
-const Cell = memo(({ board, value, x, y, onMove }) => {
+const Cell = memo(function Cell({ value, x, y, onMove }) {
   const Child = () => {
     switch (value) {
       case "X":
