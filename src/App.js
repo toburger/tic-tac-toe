@@ -63,27 +63,30 @@ const PlayerO = ({ className, ...props }) => (
 );
 const NoPlayer = (props) => <span {...props} className="NoPlayer" />;
 
-const Cell = memo(function Cell({ value, x, y, onMove }) {
-  const Child = () => {
-    switch (value) {
-      case "X":
-        return <PlayerX />;
-      case "O":
-        return <PlayerO />;
-      default:
-        return <NoPlayer />;
-    }
-  };
-  return (
-    <button
-      className="Cell"
-      disabled={value !== null}
-      onClick={(e) => onMove(x, y)}
-    >
-      <Child />
-    </button>
-  );
-});
+const Cell = memo(
+  function Cell({ value, x, y, onMove }) {
+    const Child = () => {
+      switch (value) {
+        case "X":
+          return <PlayerX />;
+        case "O":
+          return <PlayerO />;
+        default:
+          return <NoPlayer />;
+      }
+    };
+    return (
+      <button
+        className="Cell"
+        disabled={value !== null}
+        onClick={(e) => onMove(x, y)}
+      >
+        <Child />
+      </button>
+    );
+  },
+  (prev, next) => prev.value === next.value
+);
 
 const DispatchPlayer = ({ player }) =>
   player === "X" ? (
