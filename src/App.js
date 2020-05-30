@@ -7,9 +7,13 @@ import RestartImage from "./assets/restart.png";
 import "./App.css";
 
 const initialState = {
-  board: [[null, null, null], [null, null, null], [null, null, null]],
+  board: [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+  ],
   currentPlayer: "X",
-  winner: null
+  winner: null,
 };
 
 const reducer = (state, action) => {
@@ -28,7 +32,7 @@ const reducer = (state, action) => {
         ...state,
         board: newBoard,
         currentPlayer: state.currentPlayer === "X" ? "O" : "X",
-        winner
+        winner,
       };
     case "RESTART":
       return initialState;
@@ -38,25 +42,27 @@ const reducer = (state, action) => {
 };
 
 const prefetchImages = () =>
-  [PlayerXImage, PlayerOImage, RestartImage].map(img =>
+  [PlayerXImage, PlayerOImage, RestartImage].map((img) => (
     <link key={img} rel="prefetch" href={img} />
-  );
+  ));
 
-const PlayerX = ({ className, ...props }) =>
+const PlayerX = ({ className, ...props }) => (
   <img
     {...props}
     alt="PlayerX"
     src={PlayerXImage}
     className={["PlayerX", className].join(" ")}
-  />;
-const PlayerO = ({ className, ...props }) =>
+  />
+);
+const PlayerO = ({ className, ...props }) => (
   <img
     {...props}
     alt="PlayerO"
     src={PlayerOImage}
     className={["PlayerO", className].join(" ")}
-  />;
-const NoPlayer = props => <span {...props} className="NoPlayer" />;
+  />
+);
+const NoPlayer = (props) => <span {...props} className="NoPlayer" />;
 
 const Cell = onlyUpdateForKeys(["value"])(({ board, value, x, y, onMove }) => {
   const Child = () => {
@@ -73,7 +79,7 @@ const Cell = onlyUpdateForKeys(["value"])(({ board, value, x, y, onMove }) => {
     <button
       className="Cell"
       disabled={value !== null}
-      onClick={e => onMove(x, y)}
+      onClick={(e) => onMove(x, y)}
     >
       <Child />
     </button>
@@ -81,70 +87,80 @@ const Cell = onlyUpdateForKeys(["value"])(({ board, value, x, y, onMove }) => {
 });
 
 const DispatchPlayer = ({ player }) =>
-  player === "X"
-    ? <PlayerX className="PlayerX--Small" />
-    : <PlayerO className="PlayerO--Small" />;
+  player === "X" ? (
+    <PlayerX className="PlayerX--Small" />
+  ) : (
+    <PlayerO className="PlayerO--Small" />
+  );
 
-const CurrentPlayer = ({ currentPlayer }) =>
+const CurrentPlayer = ({ currentPlayer }) => (
   <div className="CurrentPlayer">
     <span className="CurrentPlayer__Text">
       Player:
       <DispatchPlayer player={currentPlayer} />
     </span>
-  </div>;
+  </div>
+);
 
-const Board = ({ board, onMove }) =>
+const Board = ({ board, onMove }) => (
   <div>
-    {board.map((ys, x) =>
+    {board.map((ys, x) => (
       <div key={`${x}`} className="Board__Row">
-        {ys.map((v, y) =>
+        {ys.map((v, y) => (
           <Cell key={`${x}-${y}`} {...{ board, value: v, x, y, onMove }} />
-        )}
+        ))}
       </div>
-    )}
-  </div>;
+    ))}
+  </div>
+);
 
-const Game = ({ board, onMove, currentPlayer }) =>
+const Game = ({ board, onMove, currentPlayer }) => (
   <div>
     <Board board={board} onMove={onMove} />
     <CurrentPlayer currentPlayer={currentPlayer} />
-  </div>;
+  </div>
+);
 
-const GameOver = ({ winner, onRestart }) =>
+const GameOver = ({ winner, onRestart }) => (
   <div className="GameOver">
     <img
       className="GameOver__Image"
-      onClick={e => onRestart()}
+      onClick={(e) => onRestart()}
       src={RestartImage}
       alt="Restart"
     />
     <p className="GameOver__Text">
-      {winner === "DRAW"
-        ? "It's a draw!"
-        : <span>
-            Player
-            <DispatchPlayer player={winner} />
-            wins!
-          </span>}
+      {winner === "DRAW" ? (
+        "It's a draw!"
+      ) : (
+        <span>
+          Player
+          <DispatchPlayer player={winner} />
+          wins!
+        </span>
+      )}
     </p>
-  </div>;
+  </div>
+);
 
 const enhance = withReducer("state", "dispatch", reducer, initialState);
 
-const App = enhance(({ state, dispatch }) =>
+const App = enhance(({ state, dispatch }) => (
   <div className="App">
     {prefetchImages()}
-    {state.winner
-      ? <GameOver
-          winner={state.winner}
-          onRestart={() => dispatch({ type: "RESTART" })}
-        />
-      : <Game
-          board={state.board}
-          currentPlayer={state.currentPlayer}
-          onMove={(x, y) => dispatch({ type: "MOVE", x, y })}
-        />}
+    {state.winner ? (
+      <GameOver
+        winner={state.winner}
+        onRestart={() => dispatch({ type: "RESTART" })}
+      />
+    ) : (
+      <Game
+        board={state.board}
+        currentPlayer={state.currentPlayer}
+        onMove={(x, y) => dispatch({ type: "MOVE", x, y })}
+      />
+    )}
   </div>
-);
+));
 
 export default App;

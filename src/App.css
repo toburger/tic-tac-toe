@@ -8,7 +8,7 @@
 
 .Cell {
   background: none;
-  border: solid 2px #DDDDDD;
+  border: solid 2px #dddddd;
   border-left: none;
   border-top: none;
   border-collapse: collapse;
@@ -42,24 +42,27 @@
   padding-bottom: 18px;
 }
 
-.PlayerX, .PlayerO, .NoPlayer {
+.PlayerX,
+.PlayerO,
+.NoPlayer {
   width: 35px;
   height: 35px;
   box-sizing: content-box;
 }
 
-.PlayerX--Small, .PlayerO--Small {
+.PlayerX--Small,
+.PlayerO--Small {
   width: 12px;
   height: 12px;
   margin: 0 5px;
 }
 
 .PlayerX {
-  animation: retract .3s ease;
+  animation: retract 0.3s ease;
 }
 
 .PlayerO {
-  animation: expand .3s ease;
+  animation: expand 0.3s ease;
 }
 
 @keyframes expand {
@@ -77,15 +80,16 @@
 }
 
 .NoPlayer {
-  display: inline-block
+  display: inline-block;
 }
 
-.GameOver, .CurrentPlayer {
+.GameOver,
+.CurrentPlayer {
   color: #939393;
   font-weight: bold;
   text-transform: uppercase;
   height: 50px;
-  display:flex;
+  display: flex;
   align-items: center;
 }
 
@@ -97,11 +101,12 @@
   filter: saturate(3);
 }
 
-.GameOver__Text, .CurrentPlayer__Text {
+.GameOver__Text,
+.CurrentPlayer__Text {
   padding: 7px 20px 4px;
   font-size: 1em;
   height: 20px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   border-radius: 20px;
   white-space: nowrap;
 }

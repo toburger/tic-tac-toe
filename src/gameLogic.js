@@ -9,15 +9,15 @@
  * * "X": PlayerX
  * * "O": PlayerO
  * * null
-*/
+ */
 
 // This lib contains powerful functions for list transformations.
 import * as R from "ramda";
 
 /**
  * Helps debugging the board
-*/
-export const logBoard = board => {
+ */
+export const logBoard = (board) => {
   console.table(board);
   return board;
 };
@@ -51,7 +51,7 @@ const checkRowsForWinner = (board, v) => {
 /**
  * Cheks if all elements of a column contain the same value 'v'.
  * Checks all three columns.
- * 
+ *
  * Uses a simple trick by transposing the board so that the whole board
  * gets rotated and the columns become rows. Then the "rows" can be passed
  * to checkRowsForWinner
@@ -89,8 +89,8 @@ const checkForWinner = (board, v) =>
  *
  * It does check if all of the boards aren't null.
  */
-const checkForDraw = board => {
-  const check = R.all(x => x !== null);
+const checkForDraw = (board) => {
+  const check = R.all((x) => x !== null);
   return check(R.flatten(board));
 };
 
@@ -100,7 +100,7 @@ const checkForDraw = board => {
  *
  * @returns "X" | "O" | "DRAW" | null
  */
-export const getWinner = board => {
+export const getWinner = (board) => {
   if (checkForWinner(board, "X"))
     // player X wins!
     return "X";
