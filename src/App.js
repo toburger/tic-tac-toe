@@ -1,5 +1,4 @@
-import React from "react";
-import { withReducer, onlyUpdateForKeys } from "recompose";
+import React, { memo, useReducer } from "react";
 import * as GameLogic from "./gameLogic";
 import PlayerXImage from "./assets/PlayerX.svg";
 import PlayerOImage from "./assets/PlayerO.svg";
@@ -64,7 +63,7 @@ const PlayerO = ({ className, ...props }) => (
 );
 const NoPlayer = (props) => <span {...props} className="NoPlayer" />;
 
-const Cell = onlyUpdateForKeys(["value"])(({ board, value, x, y, onMove }) => {
+const Cell = memo(({ board, value, x, y, onMove }) => {
   const Child = () => {
     switch (value) {
       case "X":
@@ -143,24 +142,25 @@ const GameOver = ({ winner, onRestart }) => (
   </div>
 );
 
-const enhance = withReducer("state", "dispatch", reducer, initialState);
-
-const App = enhance(({ state, dispatch }) => (
-  <div className="App">
-    {prefetchImages()}
-    {state.winner ? (
-      <GameOver
-        winner={state.winner}
-        onRestart={() => dispatch({ type: "RESTART" })}
-      />
-    ) : (
-      <Game
-        board={state.board}
-        currentPlayer={state.currentPlayer}
-        onMove={(x, y) => dispatch({ type: "MOVE", x, y })}
-      />
-    )}
-  </div>
-));
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <div className="App">
+      {prefetchImages()}
+      {state.winner ? (
+        <GameOver
+          winner={state.winner}
+          onRestart={() => dispatch({ type: "RESTART" })}
+        />
+      ) : (
+        <Game
+          board={state.board}
+          currentPlayer={state.currentPlayer}
+          onMove={(x, y) => dispatch({ type: "MOVE", x, y })}
+        />
+      )}
+    </div>
+  );
+};
 
 export default App;
