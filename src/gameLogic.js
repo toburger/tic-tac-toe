@@ -32,12 +32,12 @@ export const updateBoard = (board, x, y, value) =>
 /**
  * Gets a single board value by x and y coordinates
  */
-export const getBoard = (board, x, y) => R.path([x, y])(board);
+export const getCell = (board, x, y) => R.path([x, y])(board);
 
 /**
  * Checks if a board value can be updated (simply checks if the board contains null)
  */
-export const canUpdateBoard = (board, x, y) => getBoard(board, x, y) === null;
+export const canUpdateBoard = (board, x, y) => getCell(board, x, y) === null;
 
 /**
  * Checks if all elements a row contain the same value 'v'.
